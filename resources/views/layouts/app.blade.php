@@ -4,19 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="{{ asset('public/js/jquery.js') }}"></script>
     <script src="{{ asset('public/js/app.js') }}" defer></script>
+    <script src="{{ asset('public/js/toastr.min.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
-    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('public/css/toastr.min.css') }}">
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -81,6 +85,8 @@
                           <div class="list-group">
                               <a href="{{route('home')}}" class="list-group-item">Home</a>
                               <a href="{{route('post-create')}}" class="list-group-item">Create a new post</a>
+                              <a href="{{route('category-create')}}" class="list-group-item">Create a new caegory</a>
+                              <a href="{{route('category-index')}}" class="list-group-item">List category</a>
                           </div>
                       </div>
                     @endif
@@ -99,5 +105,11 @@
             </div>
         </main>
     </div>
+    <script>
+        @if(Session::has('success'))
+           toastr.success('{{ Session::get("success") }}');
+        @endif
+    </script>
+    
 </body>
 </html>

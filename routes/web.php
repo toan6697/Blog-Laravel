@@ -23,7 +23,18 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
       Route::get('/home', 'HomeController@index')->name('home');
 
-
+      // post
       Route::get('/post/create','postController@create')->name('post-create');
       Route::post('/post/add','postController@add')->name('post-add');
+    
+      //category
+      Route::get('/category/index','categoryController@index')->name('category-index');
+
+      Route::get('/category/create','categoryController@create')->name('category-create');
+      Route::post('/category/add','categoryController@add')->name('category-add');
+
+      Route::post('/category/delete','categoryController@delete')->name('category-delete');
+      
+      Route::post('/category/edit','categoryController@edit')->name('category-edit');
+      Route::post('/category/update','categoryController@update')->name('category-update');
 });

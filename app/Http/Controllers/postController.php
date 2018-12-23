@@ -16,6 +16,12 @@ class postController extends Controller
     }
     public function add(Request $req)
     {
+    	
+    	$this->validate($req,[
+           'title'   => 'required',
+           'featured'=> 'required|image',
+           'content'=> 'required'
+    	]);
     	dd($req->all());
     }
 }

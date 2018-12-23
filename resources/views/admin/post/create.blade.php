@@ -1,10 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+
+   <!-- kiểm tra các điều kiện để validate -->
+    @if($errors->any())
+      <div class="alert alert-danger" role="alert">
+      	 @foreach($errors->all() as $error)
+          <strong>Warning!</strong> {{ $error }} <br>
+         @endforeach
+      </div>
+    @endif
+  
+
     <div class="card">
 	  <h5 class="card-header">Form insert new post</h5>
 	  <div class="card-body">
-	    <form action="{{ route('post-add') }}" method="post" >
+	    <form action="{{ route('post-add') }}" method="post" enctype="multipart/form-data" >
 	    	<input type="hidden" name="_token" value="{{csrf_token()}}">
 	    	<fieldset class="form-group">
 	    		<label for="formGroupExampleInput">Title</label>
