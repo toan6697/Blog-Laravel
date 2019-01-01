@@ -26,6 +26,13 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
       // post
       Route::get('/post/create','postController@create')->name('post-create');
       Route::post('/post/add','postController@add')->name('post-add');
+
+      Route::get('/post/index','postController@index')->name('post-index');
+
+      Route::get('/post/delete/{id}','postController@delete')->name('post-delete');
+
+      Route::get('/post/edit/{id}','postController@edit')->name('post-edit');
+      //Route::get('/post/update','postController@delete')->name('edit-post');
     
       //category
       Route::get('/category/index','categoryController@index')->name('category-index');

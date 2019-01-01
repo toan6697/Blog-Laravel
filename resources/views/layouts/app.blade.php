@@ -85,7 +85,8 @@
                           <div class="list-group">
                               <a href="{{route('home')}}" class="list-group-item">Home</a>
                               <a href="{{route('post-create')}}" class="list-group-item">Create a new post</a>
-                              <a href="{{route('category-create')}}" class="list-group-item">Create a new caegory</a>
+                              <a href="{{route('post-index')}}" class="list-group-item">List post</a>
+                              <a href="{{route('category-create')}}" class="list-group-item">Create a new category</a>
                               <a href="{{route('category-index')}}" class="list-group-item">List category</a>
                           </div>
                       </div>
@@ -108,6 +109,7 @@
     <script>
         @if(Session::has('success'))
            toastr.success('{{ Session::get("success") }}');
+           <?php  session()->forget('success'); ?>
         @endif
     </script>
     

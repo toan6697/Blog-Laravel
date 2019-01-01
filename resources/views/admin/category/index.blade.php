@@ -29,10 +29,6 @@
 	  </div>
 	</div>
 
-
-
-
-
    <div class="card">
 	  <h5 class="card-header">Lisst category</h5>
 	  <div class="card-body">

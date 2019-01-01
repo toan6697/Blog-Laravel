@@ -26,6 +26,15 @@
 	    		<input type="file" class="form-control" name="featured" placeholder="file">
 	    	</fieldset>
 	    	<fieldset class="form-group">
+	    		<label for="formGroupExampleInput2">Category</label>
+	    		<select name="category_id" id="">
+	    			<option value="">Chọn category</option>
+	    			@foreach($kq as $key => $value)
+                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+	    			@endforeach
+	    		</select>
+	    	</fieldset>
+	    	<fieldset class="form-group">
 	    		<label for="formGroupExampleInput2">Content</label>
 	    		<input type="text" class="form-control" name="content" placeholder="content">
 	    	</fieldset>
