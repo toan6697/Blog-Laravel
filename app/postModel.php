@@ -22,4 +22,8 @@ class postModel extends Model
     {
     	return $this->belongsTo('App\categoryModel');
     }
+    public function tag()
+    {
+        return $this->belongsToMany('App\tagModel');
+    }
 }

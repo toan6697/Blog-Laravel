@@ -65,9 +65,46 @@ class postController extends Controller
         session()->put(['success'=>'xóa thnahf công hhihihi']);
     	return redirect('/admin/post/index');
     }
+
     public function edit($id)
     {
-    	$res=postModel::find($id);
-    	dd($res->featured);
+    	$res=postModel::find($id)->toArray();
+    	$res_1=categoryModel::all()->toArray();
+
+    	return view('admin.post.edit',['kq'=>$res,'kq2'=>$res_1]);
+    }
+    public function update(Request $req)
+    {
+
+    	$this->validate($req,[
+             'title'       => 'required',
+             'category_id' => 'required',
+             'content'     => 'required'
+    	]);
+    	if ($req->hasFile('featured')) {
+        if($req->file('featured')->isValid()) {
+            try {
+                $file = $req->file('featured');
+                $nameImage = $file->getClientOriginalName() ;
+
+                $path='http://nguyenductoan.com/laravel/blog-CMS/'.$file->move('upload/',$nameImage);
+            } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+
+              }
+          }
+        }
+
+        $post=postModel::find($req->id);
+        $post->title=$req->title;
+        $post->content=$req->content;
+        if(!empty($path)){
+        	$post->featured=$path;
+        }
+        else {  }
+        $post->category_id=$req->category_id;
+
+        $post->save();
+
+        return redirect('/admin/post/index');
     }
 }

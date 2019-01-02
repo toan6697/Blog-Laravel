@@ -32,7 +32,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
       Route::get('/post/delete/{id}','postController@delete')->name('post-delete');
 
       Route::get('/post/edit/{id}','postController@edit')->name('post-edit');
-      //Route::get('/post/update','postController@delete')->name('edit-post');
+      Route::post('/post/update','postController@update')->name('post-update');
     
       //category
       Route::get('/category/index','categoryController@index')->name('category-index');
@@ -44,4 +44,15 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
       
       Route::post('/category/edit','categoryController@edit')->name('category-edit');
       Route::post('/category/update','categoryController@update')->name('category-update');
+
+      //tag
+      Route::get('/tag/create','tagController@create')->name('tag-create');
+      Route::post('/tag/add','tagController@add')->name('tag-add');
+
+      Route::get('/tag/index','tagController@index')->name('tag-index');
+
+      Route::get('/tag/delete/{id}','tagController@delete')->name('tag-delete');
+
+      Route::get('/tag/edit/{id}','tagController@edit')->name('tag-edit');
+      Route::post('/tag/update','tagController@update')->name('tag-update');
 });

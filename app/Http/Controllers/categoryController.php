@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\categoryModel;
+use App\postModel;
 use Session;
 class categoryController extends Controller
 {
@@ -34,7 +36,7 @@ class categoryController extends Controller
     public function delete(Request $req)
     {
     	categoryModel::destroy($req->id);
-
+        DB::table('post')->where('category_id',$req->id)->delete();
         //Session::flash('success','Xóa thành công !');
 
     	$result=categoryModel::all()->toArray();

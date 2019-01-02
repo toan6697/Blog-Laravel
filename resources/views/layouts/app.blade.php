@@ -88,6 +88,9 @@
                               <a href="{{route('post-index')}}" class="list-group-item">List post</a>
                               <a href="{{route('category-create')}}" class="list-group-item">Create a new category</a>
                               <a href="{{route('category-index')}}" class="list-group-item">List category</a>
+                              <a href="{{route('tag-create')}}" class="list-group-item">Create a new tag </a>
+                               <a href="{{route('tag-index')}}" class="list-group-item">Tag list </a>
+
                           </div>
                       </div>
                     @endif
