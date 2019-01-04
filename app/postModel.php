@@ -18,12 +18,15 @@ class postModel extends Model
 
     protected $dates=['deleted_at'];
 
+
+   //có tác dụng thay thế cho lệnh join
     public function category()
     {
-    	return $this->belongsTo('App\categoryModel');
+    	return $this->belongsTo('App\categoryModel','id');
     }
     public function tag()
     {
-        return $this->belongsToMany('App\tagModel');
+        //tham số thứ 2 là bảng giao nhau
+        return $this->belongsToMany('App\tagModel','post_tag');
     }
 }

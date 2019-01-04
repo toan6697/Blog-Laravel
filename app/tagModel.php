@@ -11,8 +11,11 @@ class tagModel extends Model
     protected $fillable=[
        'id','tag'
     ];
+
+    //có tác dụng thay thế cho lệnh join
     public function post()
-    {
-    	return $this->belongsToMany('App\postModel');
+    {    
+        //tham số thứ 2 là bảng giao nhau
+    	return $this->belongsToMany('App\postModel','post_tag');
     }
 }

@@ -11,9 +11,11 @@ class categoryModel extends Model
        'id','name'
      ];
 
+
+    //có tác dụng thay thế cho lệnh join
      public function post()
      {
-     	return $this->hasMany('App\postModel');
+     	return $this->hasMany('App\postModel','category_id');
      }
 
 }

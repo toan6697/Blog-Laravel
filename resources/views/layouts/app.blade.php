@@ -89,8 +89,12 @@
                               <a href="{{route('category-create')}}" class="list-group-item">Create a new category</a>
                               <a href="{{route('category-index')}}" class="list-group-item">List category</a>
                               <a href="{{route('tag-create')}}" class="list-group-item">Create a new tag </a>
-                               <a href="{{route('tag-index')}}" class="list-group-item">Tag list </a>
+                              <a href="{{route('tag-index')}}" class="list-group-item">List tag </a>
 
+                             @if(Auth::user()->admin == 1) 
+                              <a href="{{route('user-index')}}" class="list-group-item">List user</a>
+                              <a href="{{route('user-create')}}" class="list-group-item">Create a new user</a>
+                             @endif 
                           </div>
                       </div>
                     @endif
@@ -113,6 +117,10 @@
         @if(Session::has('success'))
            toastr.success('{{ Session::get("success") }}');
            <?php  session()->forget('success'); ?>
+        @endif
+        @if(Session::has('info'))
+           toastr.success('{{ Session::get("info") }}');
+           <?php  session()->forget('info'); ?>
         @endif
     </script>
     

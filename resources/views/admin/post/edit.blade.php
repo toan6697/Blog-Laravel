@@ -35,6 +35,17 @@
 	    		</select>
 	    	</fieldset>
 	    	<fieldset class="form-group">
+	    		<label for="formGroupExampleInput2">Select tag</label><br>
+	    		@foreach($kq3 as $key => $value)
+                  <input type="checkbox" name="tag_id[]" value="{{$value['id']}}" @foreach($kq4 as $k => $v )
+                         @if($value['id']==$v['id']) {{ 'checked' }}
+                         @else
+                         @endif
+                     @endforeach
+                       > {{ $value['tag'] }}<br>
+	    		@endforeach
+	    	</fieldset>
+	    	<fieldset class="form-group">
 	    		<label for="formGroupExampleInput2">Content</label>
 	    		<input type="text" class="form-control" name="content" placeholder="content" value="{{ $kq['content'] }}">
 	    	</fieldset>

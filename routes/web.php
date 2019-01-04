@@ -11,6 +11,10 @@
 |
 */
 
+
+// Route::get('/test',function(){
+// 	return dd(App\postModel::find(1)->category()->get()->toArray());
+// });
 Route::get('/', function () {
     return view('welcome');
 });
@@ -55,4 +59,12 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
       Route::get('/tag/edit/{id}','tagController@edit')->name('tag-edit');
       Route::post('/tag/update','tagController@update')->name('tag-update');
+
+      //user
+      Route::get('user/index','userController@index')->name('user-index');
+
+      Route::get('/user/create','userController@create')->name('user-create');
+      Route::post('/user/add','userController@add')->name('user-add');
+
+      Route::get('/user/updatePermission','userController@updatePermission')->name('user-admin');
 });

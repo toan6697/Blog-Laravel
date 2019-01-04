@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\categoryModel;
 use App\postModel;
+use App\tagModel;
+use App\tagPostModel;
 use Session;
 class postController extends Controller
 {
@@ -23,7 +25,8 @@ class postController extends Controller
     public function create()
     {
     	$result=categoryModel::all();
-    	return view('admin.post.create',['kq'=>$result]);
+      $result_1=tagModel::all();
+    	return view('admin.post.create',['kq'=>$result,'kq1'=>$result_1]);
     }
     public function add(Request $req)
     {
@@ -31,8 +34,11 @@ class postController extends Controller
            'title'       => 'required',
            'featured'    => 'required|image',
            'category_id' => 'required',
-           'content'     => 'required'
+           'content'     => 'required',
+           'tag_id'         => 'required'
     	]);
+
+      //dd($req->all());
             
         if ($req->hasFile('featured')) {
         if($req->file('featured')->isValid()) {
@@ -46,16 +52,19 @@ class postController extends Controller
               }
           }
         } 
-    	postModel::create([ 
+    	$post=postModel::create([ 
           'title'        => $req->title,
           'content'      => $req->content,
           'category_id'  => $req->category_id,
           'featured'     => $path,
           'slug'         => str_slug($req->title,'-')
     	]);
-        
-         //Session::flash('success','Thêm thành công hahah !');
-    	 session()->put(['success'=>'Thêm thành công hhii ']) ;
+      
+      //khi thêm bản ghi vào 1 bảng sẽ tự động thêm bảng còn lại
+      $post->tag()->attach($req->tag_id);
+      
+         Session::flash('success','Thêm thành công hahah !');
+    	   //session()->put(['success'=>'Thêm thành công hhii ']) ;
          return redirect('/admin/post/index');
     }
     public function delete($id)
@@ -70,8 +79,10 @@ class postController extends Controller
     {
     	$res=postModel::find($id)->toArray();
     	$res_1=categoryModel::all()->toArray();
-
-    	return view('admin.post.edit',['kq'=>$res,'kq2'=>$res_1]);
+ 
+      $res_2=tagModel::all()->toArray();
+      $res_3=postModel::find($id)->tag()->get()->toArray();
+    	return view('admin.post.edit',['kq'=>$res,'kq2'=>$res_1,'kq3'=>$res_2,'kq4'=>$res_3]);
     }
     public function update(Request $req)
     {
@@ -79,7 +90,8 @@ class postController extends Controller
     	$this->validate($req,[
              'title'       => 'required',
              'category_id' => 'required',
-             'content'     => 'required'
+             'content'     => 'required',
+             'tag_id'      => 'required'
     	]);
     	if ($req->hasFile('featured')) {
         if($req->file('featured')->isValid()) {
@@ -105,6 +117,9 @@ class postController extends Controller
 
         $post->save();
 
+        $post->tag()->sync($req->tag_id);
+        
+        Session::flash('success','update thành công hahah !');
         return redirect('/admin/post/index');
     }
 }
