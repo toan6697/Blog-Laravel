@@ -66,5 +66,14 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
       Route::get('/user/create','userController@create')->name('user-create');
       Route::post('/user/add','userController@add')->name('user-add');
 
+      Route::get('/user/delete/{id}','userController@delete')->name('user-delete');
+      
+      //phân quyền
       Route::get('/user/updatePermission','userController@updatePermission')->name('user-admin');
+
+      //profile update
+      Route::get('/user/profile-edit','profileController@edit')->name('profile-edit');
+      Route::post('/user/profile-update','profileController@update')->name('profile-update');
+
+
 });

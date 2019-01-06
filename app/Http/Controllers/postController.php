@@ -26,6 +26,12 @@ class postController extends Controller
     {
     	$result=categoryModel::all();
       $result_1=tagModel::all();
+ 
+      if($result->count()==0 && $result_1->count()==0 ){
+        Session::flash('info','phải thêm category và tag trước khi thêm post ');
+        return redirect()->route('post-index');
+      }
+
     	return view('admin.post.create',['kq'=>$result,'kq1'=>$result_1]);
     }
     public function add(Request $req)
@@ -35,7 +41,7 @@ class postController extends Controller
            'featured'    => 'required|image',
            'category_id' => 'required',
            'content'     => 'required',
-           'tag_id'         => 'required'
+           'tag_id'      => 'required'
     	]);
 
       //dd($req->all());

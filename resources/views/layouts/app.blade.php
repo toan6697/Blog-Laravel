@@ -14,6 +14,7 @@
     <script src="{{ asset('public/js/jquery.js') }}"></script>
     <script src="{{ asset('public/js/app.js') }}" defer></script>
     <script src="{{ asset('public/js/toastr.min.js') }}"></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,6 +23,7 @@
 
     <link rel="stylesheet" href="{{ asset('public/css/toastr.min.css') }}">
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -90,6 +92,8 @@
                               <a href="{{route('category-index')}}" class="list-group-item">List category</a>
                               <a href="{{route('tag-create')}}" class="list-group-item">Create a new tag </a>
                               <a href="{{route('tag-index')}}" class="list-group-item">List tag </a>
+                              
+                              <a href="{{route('profile-edit')}}" class="list-group-item">My profile </a>
 
                              @if(Auth::user()->admin == 1) 
                               <a href="{{route('user-index')}}" class="list-group-item">List user</a>
@@ -113,16 +117,17 @@
             </div>
         </main>
     </div>
+   
     <script>
         @if(Session::has('success'))
            toastr.success('{{ Session::get("success") }}');
            <?php  session()->forget('success'); ?>
         @endif
         @if(Session::has('info'))
-           toastr.success('{{ Session::get("info") }}');
+           toastr.info('{{ Session::get("info") }}');
            <?php  session()->forget('info'); ?>
         @endif
     </script>
-    
+ 
 </body>
 </html>

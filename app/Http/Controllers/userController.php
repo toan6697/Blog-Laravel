@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\profileModel;
 use Session;
+use Auth;
 
 class userController extends Controller
 {
+    //tất cả các thao tác trong userController cần có quyền admin
     public function __construct()
     {
         $this->middleware('admin');
@@ -68,4 +70,13 @@ class userController extends Controller
             echo json_encode($array);
         }
     }
+    public function delete($id)
+    {
+        DB::table('users')->where('id',$id)->delete();
+        DB::table('profile')->where('user_id',$id)->delete();
+
+        Session::flash('success','Xóa user thành công');
+        return redirect()->back();
+    }
+   
 }

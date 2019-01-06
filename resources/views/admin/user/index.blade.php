@@ -18,7 +18,7 @@
             {{ $value->id }}
           </td>
           <td>
-            
+            <img src="{{ $value->profile->avatar }}" alt="" width="90px" height="90px">
           </td>
           <td>{{ $value->name }}</td>
           <td>
@@ -29,7 +29,7 @@
             @endif    
           </td>
           <td>
-            <a href="" class="btn btn-danger">Delete</a>
+            <a href="{{route('user-delete',['id'=>$value->id])}}" class="btn btn-danger">Delete</a>
           </td>
         </tr>
       @endforeach
