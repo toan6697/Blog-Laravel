@@ -13,7 +13,7 @@ class postModel extends Model
 	
     protected $table="post";
     protected $fillable=[
-       'id','title','content','category_id','featured','slug'
+       'id','title','content','category_id','featured','slug','user_id'
     ];
 
     protected $dates=['deleted_at'];
@@ -28,5 +28,9 @@ class postModel extends Model
     {
         //tham số thứ 2 là bảng giao nhau
         return $this->belongsToMany('App\tagModel','post_tag');
+    }
+    public function user()
+    {
+         return $this->belongsTo('App\User','id');
     }
 }

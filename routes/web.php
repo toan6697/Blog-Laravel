@@ -15,11 +15,22 @@
 // Route::get('/test',function(){
 // 	return dd(App\postModel::find(1)->category()->get()->toArray());
 // });
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'frontendController@index');
+
+Route::post('/subscribe',function(){
+	$email=request('email');
+	Newsletter::subscribe($email);
+
+    Session::flash('subscribed','Successfully subscribed');
+	return redirect()->back();
 });
 
 Auth::routes();
+
+Route::get('post/{slug}', 'frontendController@postSingle')->name('single');
+Route::get('category/{id}', 'frontendController@category')->name('category');
+Route::get('tag/{id}','frontendController@tag')->name('tag');
+Route::get('search','frontendController@search')->name('search');
 
 
 // 'middleware'=>'auth' dùng để ktra user đã đăng nhập hay chưa
@@ -74,6 +85,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
       //profile update
       Route::get('/user/profile-edit','profileController@edit')->name('profile-edit');
       Route::post('/user/profile-update','profileController@update')->name('profile-update');
-
+   
+      //setting
+      Route::get('/setting/index','SettingsController@index')->name('setting-index');
+      Route::post('/setting/update','SettingsController@update')->name('setting-update');
 
 });

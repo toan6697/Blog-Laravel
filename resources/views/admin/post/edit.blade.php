@@ -46,9 +46,14 @@
 	    		@endforeach
 	    	</fieldset>
 	    	<fieldset class="form-group">
-	    		<label for="formGroupExampleInput2">Content</label>
-	    		<input type="text" class="form-control" name="content" placeholder="content" value="{{ $kq['content'] }}">
+	    		<label for="formGroupExampleInput2">Content</label><br>
+	    		<textarea name="content" id="content">{{ htmlspecialchars_decode($kq['content']) }}</textarea>
+	    		<script>
+	    			CKEDITOR.replace('content');
+	    			CKEDITOR.config.allowedContent = true;
+	    		</script>
 	    	</fieldset>
+	    	
 	    	<fieldset class="form-group">
 	    		<div class="text-center">
 	    		   <button class="btn btn-primary">Submit</button>

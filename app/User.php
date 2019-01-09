@@ -31,4 +31,8 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\profileModel','user_id');
     }
+    public function post()
+    {
+        return $this->hasMany('App\postModel','user_id');
+    }
 }

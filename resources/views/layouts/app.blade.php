@@ -12,9 +12,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('public/js/jquery.js') }}"></script>
-    <script src="{{ asset('public/js/app.js') }}" defer></script>
+    <script src="{{ asset('public/js/app.js') }}" ></script>
     <script src="{{ asset('public/js/toastr.min.js') }}"></script>
-    
+    <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -98,6 +98,7 @@
                              @if(Auth::user()->admin == 1) 
                               <a href="{{route('user-index')}}" class="list-group-item">List user</a>
                               <a href="{{route('user-create')}}" class="list-group-item">Create a new user</a>
+                              <a href="{{route('setting-index')}}" class="list-group-item">Setting</a>
                              @endif 
                           </div>
                       </div>

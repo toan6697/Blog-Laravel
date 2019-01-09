@@ -44,7 +44,10 @@
 	    	<fieldset class="form-group">
 	    		<label for="formGroupExampleInput2">Content</label><br>
 	    		<textarea name="content" id="content"></textarea>
-	    		
+	    		<script>
+	    			CKEDITOR.replace('content');
+	    			CKEDITOR.config.allowedContent = true;
+	    		</script>
 				
 	    	</fieldset>
 	    	<fieldset class="form-group">

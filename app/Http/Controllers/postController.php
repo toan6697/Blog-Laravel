@@ -8,6 +8,7 @@ use App\postModel;
 use App\tagModel;
 use App\tagPostModel;
 use Session;
+use Auth;
 class postController extends Controller
 {
     public function index()
@@ -36,6 +37,7 @@ class postController extends Controller
     }
     public function add(Request $req)
     {
+      //dd($req->all());
     	$this->validate($req,[
            'title'       => 'required',
            'featured'    => 'required|image',
@@ -60,10 +62,12 @@ class postController extends Controller
         } 
     	$post=postModel::create([ 
           'title'        => $req->title,
-          'content'      => $req->content,
+          'content'      => htmlspecialchars($req->content),
           'category_id'  => $req->category_id,
           'featured'     => $path,
-          'slug'         => str_slug($req->title,'-')
+          'slug'         => str_slug($req->title,'-'),
+          'user_id'      => Auth::user()->id
+
     	]);
       
       //khi thêm bản ghi vào 1 bảng sẽ tự động thêm bảng còn lại
@@ -77,7 +81,7 @@ class postController extends Controller
     {
     	postModel::destroy($id);
         
-        session()->put(['success'=>'xóa thnahf công hhihihi']);
+       session()->put(['success'=>'xóa thnahf công hhihihi']);
     	return redirect('/admin/post/index');
     }
 
